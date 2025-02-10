@@ -2,6 +2,8 @@
 
 在gsm8k上面基于qwen1.5B复现一下deepseek的R1流程，本项目使用的是open-R1的代码：https://github.com/huggingface/open-r1
 
+使用的资源是4张40G的A100
+
 更多讲解见：https://zhuanlan.zhihu.com/p/22797726638
 
 # 结果
