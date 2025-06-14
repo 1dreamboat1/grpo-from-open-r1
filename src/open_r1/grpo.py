@@ -93,6 +93,11 @@ SYSTEM_PROMPT = (
 
 
 def main(script_args, training_args, model_args):
+    # print("Script arguments:", script_args)
+    # print("Training arguments:", training_args)
+    # print("Model arguments:", model_args)
+    torch.cuda.empty_cache()
+    print("training_args.resume_from_checkpoint:", training_args.resume_from_checkpoint)
     # Set seed for reproducibility
     set_seed(training_args.seed)
 
@@ -124,6 +129,7 @@ def main(script_args, training_args, model_args):
     last_checkpoint = None
     if os.path.isdir(training_args.output_dir):
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
+    print("last_checkpoint:", last_checkpoint)
     if last_checkpoint is not None and training_args.resume_from_checkpoint is None:
         logger.info(f"Checkpoint detected, resuming training at {last_checkpoint=}.")
 

@@ -2,21 +2,21 @@ import json
 import matplotlib.pyplot as plt
 
 
-def visualize(log_path):
+def visualize(path):
     step_list = []
     accuracy_reward_list = []
     format_reward_list = []
     reward_list = []
     completion_length_list = []
-    with open(log_path) as f:
+    with open(path) as f:
         lines = json.load(f)
         log_history = lines["log_history"]
         for i in log_history:
             step_list.append(i["step"])
-            accuracy_reward_list.append(i["rewards/accuracy_reward"])
+            accuracy_reward_list.append(i["rewards/accuracy_reward/mean"])
             reward_list.append(i["reward"])
-            format_reward_list.append(i["rewards/format_reward"])
-            completion_length_list.append(i["completion_length"])
+            format_reward_list.append(i["rewards/format_reward/mean"])
+            completion_length_list.append(i["completions/mean_length"])
     
     # 创建一个3x2的网格
     plt.figure(figsize=(10, 8))  # 设置画布大小
@@ -43,8 +43,9 @@ def visualize(log_path):
     
     plt.tight_layout()  # 自动调整子图参数，使之填充整个图像区域
     plt.show()
-    plt.savefig("temp/figure.png")
+    # plt.savefig("temp/figure.png")
 
 
-log_path = "DeepSeek-R1-Distill-Qwen-7B-GRPO/trainer_state.json"
-visualize(log_path)
+if "__name__" == "__main__":
+    path = "Qwen-05B-GRPO/trainer_state.json"
+    visualize(path)
